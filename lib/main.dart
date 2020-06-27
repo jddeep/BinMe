@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        platform: TargetPlatform.iOS,
+        // platform: TargetPlatform.iOS,
       ),
-      home: LandingPage(),
+      home: LandingPage(
+      ),
     );
   }
-
 }

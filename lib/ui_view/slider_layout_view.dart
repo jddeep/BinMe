@@ -6,6 +6,8 @@ import 'package:rrr/constants/constants.dart';
 import 'package:rrr/model/slider.dart';
 import 'package:rrr/widgets/slide_dots.dart';
 import 'package:rrr/widgets/slide_items/slide_item.dart';
+import 'package:rrr/utils/customRouteTransition.dart';
+import 'package:rrr/screens/mainPage.dart';
 
 class SliderLayoutView extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class SliderLayoutView extends StatefulWidget {
 class _SliderLayoutViewState extends State<SliderLayoutView> {
   int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
+  CustomRouteTransition _customRouteTransition = CustomRouteTransition();
 
   @override
   void initState() {
@@ -37,6 +40,7 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
   _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
+      print(_currentPage);
     });
   }
 
@@ -63,12 +67,30 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                       alignment: Alignment.bottomRight,
                       child: Padding(
                         padding: EdgeInsets.only(right: 15.0, bottom: 15.0),
-                        child: Text(
-                          Constants.NEXT,
-                          style: TextStyle(
-                            fontFamily: Constants.OPEN_SANS,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14.0,
+                        child: InkWell(
+                          onTap: () {
+                            if (_currentPage == sliderArrayList.length - 1) {
+                              Navigator.pushReplacement(
+                                context,
+                                _customRouteTransition.createPageRoute(
+                                  navigateTo: MainPage(selIndex: 0,),
+                                ),
+                              );
+                            } else {
+                              _pageController.animateToPage(
+                                _currentPage = _currentPage + 1,
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            }
+                          },
+                          child: Text(
+                            Constants.NEXT,
+                            style: TextStyle(
+                              fontFamily: Constants.OPEN_SANS,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.0,
+                            ),
                           ),
                         ),
                       ),
@@ -77,13 +99,22 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                       alignment: Alignment.bottomLeft,
                       child: Padding(
                         padding: EdgeInsets.only(left: 15.0, bottom: 15.0),
-                        child: Text(
-                          Constants.SKIP,
-                          style: TextStyle(
-                            fontFamily: Constants.OPEN_SANS,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14.0,
-                            color: Colors.black26
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              _customRouteTransition.createPageRoute(
+                                navigateTo: MainPage(selIndex: 0,),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            Constants.SKIP,
+                            style: TextStyle(
+                                fontFamily: Constants.OPEN_SANS,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14.0,
+                                color: Colors.black26),
                           ),
                         ),
                       ),
