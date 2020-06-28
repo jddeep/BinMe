@@ -35,6 +35,9 @@ dependencies:
   google_fonts:
 
   image_picker: ^0.6.7+2
+  firebase_auth:
+  cloud_firestore:
+  google_sign_in:
 
 
 
