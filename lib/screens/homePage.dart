@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -6,6 +7,8 @@ import 'package:rrr/screens/dustSelection/dustSelectionPage.dart';
 import 'package:rrr/utils/customRouteTransition.dart';
 
 class HomePage extends StatefulWidget {
+  final FirebaseUser user;
+  HomePage({@required this.user});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -84,7 +87,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
   _streamLoc.cancel();
   }
 
@@ -115,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                       ScrollController scrollController) {
                     return SingleChildScrollView(
                       controller: scrollController,
-                      child: CustomScrollViewContent(),
+                      child: CustomScrollViewContent(_center),
                     );
                   },
                 ),
@@ -127,6 +129,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 class CustomScrollViewContent extends StatelessWidget {
+  final LatLng location;
+  CustomScrollViewContent(this.location);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -142,13 +146,15 @@ class CustomScrollViewContent extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
         ),
-        child: CustomInnerContent(),
+        child: CustomInnerContent(this.location),
       ),
     );
   }
 }
 
 class CustomInnerContent extends StatelessWidget {
+  final LatLng location;
+  CustomInnerContent(this.location);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -192,6 +198,7 @@ class CustomInnerContent extends StatelessWidget {
                           context,
                           CustomRouteTransition().createPageRoute(
                             navigateTo: DustSelectionPage(
+                              loaction: this.location,
                               dustCode:
                                   "123456", //todo: need to be dynamic (fetch from qr code or textfield).
                               dustbinType: 1, //todo: need to be dynamic (fetch from qr code or textfield)

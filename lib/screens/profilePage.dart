@@ -1,13 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rrr/screens/signup/loginPage.dart';
 
 class ProfilePage extends StatefulWidget {
+  final FirebaseUser user;
+  ProfilePage({@required this.user});
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   var _userData;
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   void getUserData() async {
     await Firestore.instance.collection('users').getDocuments().then((docs) {
@@ -17,6 +23,17 @@ class _ProfilePageState extends State<ProfilePage> {
         print('Name:' + _userData['name']);
       });
     });
+  }
+
+  _logOut() {
+    googleSignIn.signOut();
+    FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(),
+      ),
+    );
   }
 
   @override
@@ -47,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Positioned(
               width: 350.0,
-              top: MediaQuery.of(context).size.height / 5,
+              // top: MediaQuery.of(context).size.height / 5,
               child: Column(
                 children: <Widget>[
                   Container(
@@ -64,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ])),
                   SizedBox(height: 50.0),
                   Text(
-                    _userData['name'],
+                    "${widget.user.displayName}", //_userData['name'],
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -135,7 +152,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.red,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _logOut();
+                          },
                           child: Center(
                             child: Text(
                               'Log out',

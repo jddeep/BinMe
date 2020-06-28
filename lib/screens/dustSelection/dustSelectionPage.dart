@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rrr/constants/constants.dart';
 import 'package:rrr/utils/customRouteTransition.dart';
 
 import '../QrViewPage.dart';
@@ -10,7 +13,11 @@ import '../QrViewPage.dart';
 class DustSelectionPage extends StatefulWidget {
   final String dustCode;
   final int dustbinType;
-  DustSelectionPage({@required this.dustCode, @required this.dustbinType});
+  final LatLng loaction;
+  DustSelectionPage(
+      {@required this.dustCode,
+      @required this.dustbinType,
+      @required this.loaction});
   @override
   _DustSelectionPageState createState() => _DustSelectionPageState();
 }
@@ -24,6 +31,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
   File _image;
 
   AnimationController animationController;
+  String _address = "";
 
   @override
   void initState() {
@@ -34,6 +42,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
       vsync: this,
       duration: new Duration(milliseconds: 1000),
     );
+    _getAddress(widget.loaction);
   }
 
   _showDialogBox() {
@@ -108,6 +117,17 @@ class _DustSelectionPageState extends State<DustSelectionPage>
 
     return _file;
   }
+
+  Future<String> _getAddress(LatLng location )async {
+    final coordinates = new Coordinates(location.latitude, location.longitude);
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var first = addresses.first;
+    print("${first.featureName} , ${first.addressLine}");
+    setState(() {
+      _address = "${first.featureName}, ${first.addressLine}";
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +210,8 @@ class _DustSelectionPageState extends State<DustSelectionPage>
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: addressContainer(dustbinType: widget.dustbinType),
+                child: addressContainer(
+                    dustbinType: widget.dustbinType, location: widget.loaction, address : _address),
               ),
               SizedBox(
                 height: 16.0,
@@ -244,7 +265,8 @@ class _DustSelectionPageState extends State<DustSelectionPage>
   ///################### [WIDGETS] ##########################
   //#########################################################
 
-  Widget addressContainer({@required int dustbinType}) {
+  Widget addressContainer(
+      {@required int dustbinType, LatLng location, String address}) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.grey[300], borderRadius: BorderRadius.circular(16.0)),
@@ -279,9 +301,10 @@ class _DustSelectionPageState extends State<DustSelectionPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.65,
                   child: Text(
-                    "wcja ai ajs kaks ajij cajjca ajca ajc na",
+                    "$address",
+                    // "${location.longitude}, ${location.latitude}",
                     style: TextStyle(color: Colors.black),
                   ),
                 ),

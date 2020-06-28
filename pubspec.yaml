@@ -38,6 +38,8 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   google_sign_in:
+  geocoder: ^0.2.1
+
 
 
 
