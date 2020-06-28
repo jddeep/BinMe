@@ -29,27 +29,33 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentPageIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            title: Text("Map"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text("Profile"),
-          ),
-        ],
-        currentIndex: _currentPageIndex,
-        onTap: (index){
-          setState(() {
-            _currentPageIndex = index;
-          });
-        },
+      bottomNavigationBar: ClipRRect(
+        child: BottomNavigationBar(
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white38,
+          backgroundColor: Color(0xFF2B4F50),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              title: Text("Map"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text("Profile"),
+            ),
+          ],
+          currentIndex: _currentPageIndex,
+          onTap: (index){
+            setState(() {
+              _currentPageIndex = index;
+            });
+          },
+        ),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0),topRight: Radius.circular(8.0)),
       ),
     );
   }
