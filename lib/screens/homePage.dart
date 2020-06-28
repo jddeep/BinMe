@@ -185,6 +185,7 @@ class CustomInnerContent extends StatelessWidget {
                             navigateTo: DustSelectionPage(
                               dustCode:
                                   "123456", //todo: need to be dynamic (fetch from qr code or textfield).
+                              dustbinType: 1, //todo: need to be dynamic (fetch from qr code or textfield)
                             ),
                           ),
                         );
