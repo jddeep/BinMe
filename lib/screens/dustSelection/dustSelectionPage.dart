@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rrr/utils/customRouteTransition.dart';
 
 import '../QrViewPage.dart';
@@ -11,17 +15,98 @@ class DustSelectionPage extends StatefulWidget {
   _DustSelectionPageState createState() => _DustSelectionPageState();
 }
 
-class _DustSelectionPageState extends State<DustSelectionPage> {
+class _DustSelectionPageState extends State<DustSelectionPage>
+    with SingleTickerProviderStateMixin {
   TextEditingController _editingController = TextEditingController();
   int _dustType;
-
   List<int> _selectedWasteImages = [];
+
+  File _image;
+
+  AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
     _editingController = TextEditingController(text: widget.dustCode ?? "");
     _dustType = widget.dustbinType;
+    animationController = new AnimationController(
+      vsync: this,
+      duration: new Duration(milliseconds: 1000),
+    );
+  }
+
+  _showDialogBox() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        animationController.repeat();
+        bool _showRot = true;
+
+        return StatefulBuilder(builder: (context, setState) {
+          Timer.periodic(Duration(seconds: 4), (timer) {
+            print("########");
+
+            timer.cancel();
+            animationController.stop();
+            setState(() {
+              _showRot = false;
+            });
+          });
+          return AlertDialog(
+            content: Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: Center(
+                child: _showRot
+                    ? RotationTransition(
+                        turns: Tween(begin: 0.0, end: 1.0)
+                            .animate(animationController),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          child: Center(
+                            child: Icon(
+                              Icons.monetization_on,
+                              size: 40.0,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.yellow,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      )
+                    : Text("Points: 500"),
+              ),
+            ),
+            actions: [
+              !_showRot
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RaisedButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                      ],
+                    )
+                  : Container(),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  Future<File> _getImageFromGallery() async {
+    File _file;
+    await ImagePicker()
+        .getImage(source: ImageSource.camera)
+        .then((_pickedFile) {
+      _file = File(_pickedFile.path);
+    });
+
+    return _file;
   }
 
   @override
@@ -118,12 +203,46 @@ class _DustSelectionPageState extends State<DustSelectionPage> {
                 height: 16.0,
               ),
               dustSubTypeContainer(dustType: _dustType ?? widget.dustbinType),
+              SizedBox(
+                height: 16.0,
+              ),
+              _image != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                      child: pickedImageContainer(_image),
+                    )
+                  : Container(),
             ],
           ),
         ),
       ),
+      floatingActionButton: _selectedWasteImages.length > 0
+          ? FloatingActionButton(
+              onPressed: () {
+                if (_image == null) {
+                  _getImageFromGallery().then((_file) {
+                    setState(() {
+                      _image = _file;
+                    });
+                    print(_image.path);
+                  });
+                } else {
+                  //show Dialog box
+                  _showDialogBox();
+                }
+              },
+              child: Center(
+                  child: Icon(_image != null ? Icons.send : Icons.add_a_photo,
+                      color: Colors.white)),
+              backgroundColor: Colors.cyan,
+            )
+          : null,
     );
   }
+
+  //#########################################################
+  ///################### [WIDGETS] ##########################
+  //#########################################################
 
   Widget addressContainer({@required int dustbinType}) {
     return Container(
@@ -363,6 +482,44 @@ class _DustSelectionPageState extends State<DustSelectionPage> {
                 ),
               )
             : Container(),
+      ],
+    );
+  }
+
+  Widget pickedImageContainer(File _file) {
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Container(
+          // color: Colors.amber,
+          width: MediaQuery.of(context).size.width * 0.4,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+              color: Colors.grey,
+              child: Center(
+                child: Image(
+                  image: Image.file(_file).image,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+            top: 0.0,
+            right: 0.0,
+            child: IconButton(
+              icon: Icon(
+                Icons.cancel,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  _image = null;
+                });
+              },
+            ))
       ],
     );
   }

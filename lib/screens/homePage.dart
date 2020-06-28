@@ -59,6 +59,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  var  _streamLoc;
+
   @override
   void initState() {
     super.initState();
@@ -70,13 +72,20 @@ class _HomePageState extends State<HomePage> {
       _showMarkers();
     });
 
-    Location.instance.onLocationChanged.listen((locData) {
+    _streamLoc =  Location.instance.onLocationChanged.listen((locData) {
       setState(() {
         _mylocation = locData;
         _center = LatLng(_mylocation.latitude, _mylocation.longitude);
       });
       _upDateMarker();
     });
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+  _streamLoc.cancel();
   }
 
   @override
