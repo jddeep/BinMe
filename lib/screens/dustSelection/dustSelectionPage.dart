@@ -127,32 +127,35 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                   children: [
                     Flexible(
                       flex: 3,
-                      child: TextField(
-                        controller: _editingController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          // focusColor: Colors.grey[200],
-                          hintText: "Enter dustbin no.",
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide:
-                                  BorderSide(color: Colors.transparent)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide:
-                                  BorderSide(color: Colors.transparent)),
-                          fillColor: Colors.grey[200],
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                        onEditingComplete: () {
-                          // todo
-                        },
-                      ),
+                      child: Container(
+                          child: Text(widget.dustCode ?? '123456'),
+                          color: Colors.grey[200]),
+                      // child: TextField(
+                      //   controller: _editingController,
+                      //   keyboardType: TextInputType.number,
+                      //   decoration: InputDecoration(
+                      //     // focusColor: Colors.grey[200],
+                      //     hintText: "Enter dustbin no.",
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(8.0),
+                      //         borderSide:
+                      //             BorderSide(color: Colors.transparent)),
+                      //     focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(8.0),
+                      //         borderSide:
+                      //             BorderSide(color: Colors.transparent)),
+                      //     fillColor: Colors.grey[200],
+                      //     filled: true,
+                      //     border: OutlineInputBorder(
+                      //       borderSide: BorderSide(
+                      //         color: Colors.transparent,
+                      //       ),
+                      //     ),
+                      //   ),
+                      //   onEditingComplete: () {
+                      //     // todo
+                      //   },
+                      // ),
                     ),
                     SizedBox(
                       width: 10.0,
@@ -459,10 +462,17 @@ class _DustSelectionPageState extends State<DustSelectionPage>
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8.0),
+            image: DecorationImage(
+                image: AssetImage(dustType == 1
+                    ? 'assets/images/non_biodegradable.jpg'
+                    : dustType == 2
+                        ? 'assets/images/medical_waste.jpg'
+                        : 'assets/images/biodegradable.jpg'),
+                fit: BoxFit.cover),
           ),
-          child: Center(
-            child: image ?? Container(),
-          ),
+          // child: Center(
+          //   child: image ?? Container(),
+          // ),
         ),
         selected
             ? Container(
