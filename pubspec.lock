@@ -128,6 +128,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
+
   image:
     dependency: transitive
     description:
@@ -142,6 +143,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.7+2"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+
   js:
     dependency: transitive
     description:
@@ -190,6 +207,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.6.4"
   path_provider:
     dependency: transitive
@@ -219,6 +237,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+=======
+    version: "1.7.0"
+>>>>>>> 4a0bcd64cd933803a16ca3807c3b771df6fd056d
   pedantic:
     dependency: transitive
     description:
@@ -226,6 +247,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+<<<<<<< HEAD
   petitparser:
     dependency: transitive
     description:
@@ -240,6 +262,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+=======
+>>>>>>> 4a0bcd64cd933803a16ca3807c3b771df6fd056d
   plugin_platform_interface:
     dependency: transitive
     description:
