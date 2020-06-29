@@ -1,15 +1,19 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rrr/constants/constants.dart';
 import 'package:rrr/model/slider.dart';
+import 'package:rrr/screens/signup/loginPage.dart';
 import 'package:rrr/widgets/slide_dots.dart';
 import 'package:rrr/widgets/slide_items/slide_item.dart';
 import 'package:rrr/utils/customRouteTransition.dart';
 import 'package:rrr/screens/mainPage.dart';
 
 class SliderLayoutView extends StatefulWidget {
+  final FirebaseUser user;
+  SliderLayoutView({@required this.user});
   @override
   State<StatefulWidget> createState() => _SliderLayoutViewState();
 }
@@ -22,13 +26,13 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      if (_currentPage < 2) {
-        _currentPage++;
-      } else {
-        _currentPage = 0;
-      }
-    });
+    // Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    //   if (_currentPage < 2) {
+    //     _currentPage++;
+    //   } else {
+    //     _currentPage = 0;
+    //   }
+    // });
   }
 
   @override
@@ -73,7 +77,12 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                               Navigator.pushReplacement(
                                 context,
                                 _customRouteTransition.createPageRoute(
-                                  navigateTo: MainPage(selIndex: 0,),
+                                  navigateTo: widget.user == null
+                                      ? LoginPage()
+                                      : MainPage(
+                                          selIndex: 0,
+                                          user: widget.user,
+                                        ),
                                 ),
                               );
                             } else {
@@ -104,7 +113,12 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                             Navigator.pushReplacement(
                               context,
                               _customRouteTransition.createPageRoute(
-                                navigateTo: MainPage(selIndex: 0,),
+                                navigateTo: widget.user == null
+                                    ? LoginPage()
+                                    : MainPage(
+                                        selIndex: 0,
+                                        user: widget.user,
+                                      ),
                               ),
                             );
                           },

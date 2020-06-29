@@ -36,7 +36,9 @@ class InfoDetailPage extends StatelessWidget {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.of(context).pop();
+                        },
                           onLongPress: (){},
                           child: Container(
                             height: 45,

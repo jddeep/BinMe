@@ -7,5 +7,4 @@ class Constants{
   static const String SLIDER_HEADING_2 = "Easy to Use!";
   static const String SLIDER_HEADING_3 = "Connect with Others";
   static const String SLIDER_DESC = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies, erat vitae porta consequat.";
-
 }
