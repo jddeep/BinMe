@@ -100,7 +100,16 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         RaisedButton(
-                            child: Text("Ok"),
+                            color: Color(0xFF2B4F50),
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "PROCEED",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.sourceSansPro().fontFamily,
+                                  fontSize: 17.0),
+                            ),
                             onPressed: () {
                               Navigator.pop(context);
                               Navigator.pop(context);
