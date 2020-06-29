@@ -118,94 +118,91 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 8,
+                  // flex: 8,
                   child: Container(
                     height: MediaQuery.of(context).size.height,
                     child: Image.asset("assets/images/phone.png"),
                   ),
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16.0),
-                            child: Text(
-                              "Learn how\nyou can contribute",
-                              style: TextStyle(
-                                  fontFamily:
-                                  GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
-                                      .fontFamily,
-                                  color: Colors.black,
-                                  fontSize: 32),
-                            ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: Text(
+                            "Learn how\nyou can contribute",
+                            style: TextStyle(
+                                fontFamily:
+                                GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                    .fontFamily,
+                                color: Colors.black,
+                                fontSize: 32),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: Text(
-                              "Tap to learn more.",
-                              style: TextStyle(
-                                  fontFamily:
-                                  GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
-                                      .fontFamily,
-                                  color: Colors.black45,
-                                  fontSize: 18),
-                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Text(
+                            "Tap to learn more.",
+                            style: TextStyle(
+                                fontFamily:
+                                GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                    .fontFamily,
+                                color: Colors.black45,
+                                fontSize: 18),
                           ),
-                          Container(
-                            height: 32,
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: _onLoading,
-                              child: Container(
+                        ),
+                        Container(
+                          height: 32,
+                        ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: _onLoading,
+                            child: Container(
 //                      width: MediaQuery.of(context).size.width * 0.8,
 //                    height: 50.0,
-                                constraints: BoxConstraints(minHeight: 65, maxHeight: 65),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF2B4F50),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      // Container(
-                                      //   height: 40.0,
-                                      //   width: 80.0,
-                                      Text("Sign In with",
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  GoogleFonts.sourceSansPro().fontFamily,
-                                              fontSize: 22.0,
-                                              color: Colors.white)),
-                                      Container(
-                                        width: 12,
-                                      ),
-                                      Image.asset(
-                                        "assets/images/google_sign_in_logo.png",
-                                        height:32.0,
-                                        color: Colors.white,
-                                        // ),
-                                      ),
-                                      //By Signing up, you agree to our Terms of Service and Privacy Policy
-                                    ],
-                                  ),
+                              constraints: BoxConstraints(minHeight: 65, maxHeight: 65),
+                              decoration: BoxDecoration(
+                                color: Color(0xFF2B4F50),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    // Container(
+                                    //   height: 40.0,
+                                    //   width: 80.0,
+                                    Text("Sign In with",
+                                        style: TextStyle(
+                                            fontFamily:
+                                                GoogleFonts.sourceSansPro().fontFamily,
+                                            fontSize: 22.0,
+                                            color: Colors.white)),
+                                    Container(
+                                      width: 12,
+                                    ),
+                                    Image.asset(
+                                      "assets/images/google_sign_in_logo.png",
+                                      height:32.0,
+                                      color: Colors.white,
+                                      // ),
+                                    ),
+                                    //By Signing up, you agree to our Terms of Service and Privacy Policy
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

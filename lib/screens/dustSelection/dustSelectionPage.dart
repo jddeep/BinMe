@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rrr/constants/constants.dart';
@@ -118,16 +119,16 @@ class _DustSelectionPageState extends State<DustSelectionPage>
     return _file;
   }
 
-  Future<String> _getAddress(LatLng location )async {
+  Future<String> _getAddress(LatLng location) async {
     final coordinates = new Coordinates(location.latitude, location.longitude);
-    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var addresses =
+        await Geocoder.local.findAddressesFromCoordinates(coordinates);
     var first = addresses.first;
     print("${first.featureName} , ${first.addressLine}");
     setState(() {
       _address = "${first.featureName}, ${first.addressLine}";
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -147,59 +148,72 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                   children: [
                     Flexible(
                       flex: 3,
-                      child: Container(
-                          child: Text(widget.dustCode ?? '123456'),
-                          color: Colors.grey[200]),
-                      // child: TextField(
-                      //   controller: _editingController,
-                      //   keyboardType: TextInputType.number,
-                      //   decoration: InputDecoration(
-                      //     // focusColor: Colors.grey[200],
-                      //     hintText: "Enter dustbin no.",
-                      //     enabledBorder: OutlineInputBorder(
-                      //         borderRadius: BorderRadius.circular(8.0),
-                      //         borderSide:
-                      //             BorderSide(color: Colors.transparent)),
-                      //     focusedBorder: OutlineInputBorder(
-                      //         borderRadius: BorderRadius.circular(8.0),
-                      //         borderSide:
-                      //             BorderSide(color: Colors.transparent)),
-                      //     fillColor: Colors.grey[200],
-                      //     filled: true,
-                      //     border: OutlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: Colors.transparent,
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   onEditingComplete: () {
-                      //     // todo
-                      //   },
-                      // ),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.sourceSansPro(
+                                    fontWeight: FontWeight.bold)
+                                .fontFamily,
+                            fontSize: 24,
+                            letterSpacing: 10.5,
+                            color: Color(0xFF2B4F50)),
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          // focusColor: Colors.grey[200],
+                          hintText: "123456",
+                          hintStyle: TextStyle(
+                              fontFamily: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.bold)
+                                  .fontFamily,
+                              fontSize: 24,
+                              letterSpacing: 10.5,
+                              color: Colors.black38),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: BorderSide(
+                                  color: Color(0xFF2B4F50), width: 2.5)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: BorderSide(
+                                  color: Color(0xFF2B4F50), width: 2.5)),
+//                        fillColor: Colors.grey[200],
+//                        filled: true,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
+                        ),
+                        onEditingComplete: () {},
+                      ),
                     ),
                     SizedBox(
                       width: 10.0,
                     ),
                     Flexible(
-                      flex: 2,
+                      flex: 1,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            color: Color(0xFF2B4F50),
                             borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(
-                          child: InkWell(
-                            onTap: () async {
-                              final pop = await Navigator.push(
-                                context,
-                                CustomRouteTransition().createPageRoute(
-                                  navigateTo: QrViewPage(),
-                                ),
-                              );
-                              // todo: Do something with pop data (which is coming from qrview page).
-                            },
-                            child: Icon(
-                              Icons.center_focus_strong,
-                              size: 58.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: InkWell(
+                              onTap: () async {
+                                final pop = await Navigator.push(
+                                  context,
+                                  CustomRouteTransition().createPageRoute(
+                                    navigateTo: QrViewPage(),
+                                  ),
+                                );
+                                // todo: Do something with pop data (which is coming from qrview page).
+                              },
+                              child: Icon(
+                                Icons.center_focus_strong,
+                                size: 58.0,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -214,7 +228,9 @@ class _DustSelectionPageState extends State<DustSelectionPage>
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: addressContainer(
-                    dustbinType: widget.dustbinType, location: widget.loaction, address : _address,),
+                    dustbinType: widget.dustbinType,
+                    location: widget.loaction,
+                    address: _address),
               ),
               SizedBox(
                 height: 16.0,
@@ -270,161 +286,178 @@ class _DustSelectionPageState extends State<DustSelectionPage>
 
   Widget addressContainer(
       {@required int dustbinType, LatLng location, String address}) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.grey[300], borderRadius: BorderRadius.circular(16.0)),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.18,
-            decoration: BoxDecoration(
-              color: Colors.green[300],
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.location_on,
-                  size: 60.0,
-                  color: Colors.red,
-                ),
+    return Card(
+      elevation: 8.0,
+      clipBehavior: Clip.hardEdge,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      child: Container(
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.4),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.location_on,
+                size: 60.0,
+                color: Color(0xFF2B4F50),
               ),
             ),
-          ),
-          SizedBox(width: 16.0),
-          Container(
-            padding: const EdgeInsets.only(top: 8.0),
-            height: MediaQuery.of(context).size.height * 0.18,
-            // color: Col,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.65,
-                  child: Text(
-                    "$address",
-                    // "${location.longitude}, ${location.latitude}",
-                    style: TextStyle(color: Colors.black),
+            // SizedBox(width: 10.0),
+            Container(
+              padding: const EdgeInsets.only(top: 8.0),
+              height: MediaQuery.of(context).size.height * 0.22,
+              // color: Col,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child: Text(
+                      "$address",
+                      //"${location.longitude}, ${location.latitude} sjaj ska ajka ksacka aakc akmc a akmjav ak akavkmak ",
+                      style: TextStyle(
+                          fontFamily: GoogleFonts.sourceSansPro(
+                                  fontWeight: FontWeight.w600)
+                              .fontFamily,
+                          fontSize: 18,
+                          color: Colors.black),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Chip(
-                          label: Text("lebel 1"),
-                          backgroundColor: dustbinType == 1
-                              ? Colors.red
-                              : Colors.red.withOpacity(0.3)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Chip(
-                          label: Text("lebel 2"),
-                          backgroundColor: dustbinType == 2
-                              ? Colors.blue
-                              : Colors.blue.withOpacity(0.3)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Chip(
-                        label: Text("lebel 3"),
-                        backgroundColor: dustbinType == 3
-                            ? Colors.green
-                            : Colors.green.withOpacity(0.3),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 4.0),
+                        child: Chip(
+                            label: Text("lebel 1"),
+                            backgroundColor: dustbinType == 1
+                                ? Color(0xFFFFCCCC)
+                                : Color(0xFFFFCCCC).withOpacity(0.3)),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Chip(
+                            label: Text("lebel 2"),
+                            backgroundColor: dustbinType == 2
+                                ? Colors.blue
+                                : Colors.blue.withOpacity(0.3)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Chip(
+                          label: Text("lebel 3"),
+                          backgroundColor: dustbinType == 3
+                              ? Colors.green
+                              : Colors.green.withOpacity(0.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 16.0),
-        ],
+            SizedBox(height: 16.0),
+          ],
+        ),
       ),
     );
   }
 
   Widget selectionContainer() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      // height: MediaQuery.of(context).size.height * 0.3,
-      child: Column(
-        children: [
-          Row(
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      elevation: 8.0,
+      color: Colors.white,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        // height: MediaQuery.of(context).size.height * 0.3,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
             children: [
-              Radio(
-                value: 1,
-                groupValue: _dustType,
-                onChanged: (val) {
-                  setState(() {
-                    _dustType = val;
-                  });
-                },
+              Row(
+                children: [
+                  Radio(
+                    value: 1,
+                    groupValue: _dustType,
+                    activeColor: Colors.pink[200],
+                    onChanged: (val) {
+                      setState(() {
+                        _dustType = val;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Non-Bio Degradable",
+                    style: TextStyle(
+                        fontFamily: GoogleFonts.sourceSansPro().fontFamily,
+                        fontSize: 18.0,
+                        color: Colors.pink[200],
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
-              Text(
-                "Non-Bio Degradable",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.red,
-                    fontWeight: FontWeight.w500),
+              Row(
+                children: [
+                  Radio(
+                    value: 2,
+                    groupValue: _dustType,
+                    activeColor: Colors.blue,
+                    onChanged: (val) {
+                      setState(() {
+                        _dustType = val;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Medical Waste",
+                    style: TextStyle(
+                        fontFamily: GoogleFonts.sourceSansPro().fontFamily,
+                        fontSize: 18.0,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio(
+                    value: 3,
+                    groupValue: _dustType,
+                    activeColor: Colors.green,
+                    onChanged: (val) {
+                      setState(() {
+                        _dustType = val;
+                      });
+                    },
+                  ),
+                  Text(
+                    "Bio Degradable",
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.sourceSansPro().fontFamily,
+                      fontSize: 18.0,
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          Row(
-            children: [
-              Radio(
-                value: 2,
-                groupValue: _dustType,
-                onChanged: (val) {
-                  setState(() {
-                    _dustType = val;
-                  });
-                },
-              ),
-              Text(
-                "Medical Waste",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Radio(
-                value: 3,
-                groupValue: _dustType,
-                onChanged: (val) {
-                  setState(() {
-                    _dustType = val;
-                  });
-                },
-              ),
-              Text(
-                "Bio Degradable",
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -481,7 +514,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
         Container(
           //? Image Container
           height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery.of(context).size.width * 0.4,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8.0),
@@ -501,7 +534,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
             ? Container(
                 //? Image Container
                 height: MediaQuery.of(context).size.height * 0.2,
-                width: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.4,
                 decoration: BoxDecoration(
                   color: Colors.purple.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(8.0),

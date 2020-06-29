@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Positioned(
               width: 350.0,
-              // top: MediaQuery.of(context).size.height / 5,
+              top: MediaQuery.of(context).size.height / 5,
               child: Column(
                 children: <Widget>[
                   Container(
