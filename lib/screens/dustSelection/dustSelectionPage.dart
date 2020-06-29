@@ -97,6 +97,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                             child: Text("Ok"),
                             onPressed: () {
                               Navigator.pop(context);
+                              Navigator.pop(context);
                             }),
                       ],
                     )
@@ -149,6 +150,8 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                     Flexible(
                       flex: 3,
                       child: TextField(
+                        enabled: false,
+                        controller: _editingController,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: GoogleFonts.sourceSansPro(
@@ -168,6 +171,10 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                               fontSize: 24,
                               letterSpacing: 10.5,
                               color: Colors.black38),
+                          disabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: BorderSide(
+                                  color: Color(0xFF2B4F50), width: 2.5)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               borderSide: BorderSide(

@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderRadius: BorderRadius.all(Radius.circular(75.0)),
                           boxShadow: [
                             BoxShadow(blurRadius: 7.0, color: Colors.black)
-                          ])),
+                          ]),),
                   SizedBox(height: 50.0),
                   Text(
                     "${widget.user.displayName}", //_userData['name'],
