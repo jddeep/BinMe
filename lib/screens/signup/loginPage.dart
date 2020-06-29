@@ -134,10 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: Text(
-                            "Learn how\nyou can contribute",
+                            "Log in to Get Started!",
                             style: TextStyle(
-                                fontFamily:
-                                GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                fontFamily: GoogleFonts.sourceSansPro(
+                                        fontWeight: FontWeight.bold)
                                     .fontFamily,
                                 color: Colors.black,
                                 fontSize: 32),
@@ -146,10 +146,10 @@ class _LoginPageState extends State<LoginPage> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 16.0),
                           child: Text(
-                            "Tap to learn more.",
+                            "",
                             style: TextStyle(
-                                fontFamily:
-                                GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                fontFamily: GoogleFonts.sourceSansPro(
+                                        fontWeight: FontWeight.bold)
                                     .fontFamily,
                                 color: Colors.black45,
                                 fontSize: 18),
@@ -165,13 +165,15 @@ class _LoginPageState extends State<LoginPage> {
                             child: Container(
 //                      width: MediaQuery.of(context).size.width * 0.8,
 //                    height: 50.0,
-                              constraints: BoxConstraints(minHeight: 65, maxHeight: 65),
+                              constraints:
+                                  BoxConstraints(minHeight: 65, maxHeight: 65),
                               decoration: BoxDecoration(
                                 color: Color(0xFF2B4F50),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                                     Text("Sign In with",
                                         style: TextStyle(
                                             fontFamily:
-                                                GoogleFonts.sourceSansPro().fontFamily,
+                                                GoogleFonts.sourceSansPro()
+                                                    .fontFamily,
                                             fontSize: 22.0,
                                             color: Colors.white)),
                                     Container(
@@ -191,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     Image.asset(
                                       "assets/images/google_sign_in_logo.png",
-                                      height:32.0,
+                                      height: 32.0,
                                       color: Colors.white,
                                       // ),
                                     ),

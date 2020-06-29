@@ -24,7 +24,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final _pages = [
-      HomePage(user: widget.user,),
+      HomePage(
+        user: widget.user,
+      ),
       MapPage(),
       ProfilePage(user: widget.user),
     ];
@@ -42,8 +44,8 @@ class _MainPageState extends State<MainPage> {
               title: Text("Home"),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.map),
-              title: Text("Map"),
+              icon: Icon(Icons.info),
+              title: Text("Info"),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
@@ -51,13 +53,14 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
           currentIndex: _currentPageIndex,
-          onTap: (index){
+          onTap: (index) {
             setState(() {
               _currentPageIndex = index;
             });
           },
         ),
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0),topRight: Radius.circular(8.0)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
       ),
     );
   }

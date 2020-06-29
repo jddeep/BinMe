@@ -85,7 +85,13 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                           ),
                         ),
                       )
-                    : Text("Points: 500"),
+                    : Text("Coins: 500",
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontFamily: GoogleFonts.sourceSansPro(
+                                  fontWeight: FontWeight.bold)
+                              .fontFamily,
+                        )),
               ),
             ),
             actions: [
@@ -339,7 +345,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0, bottom: 4.0),
                         child: Chip(
-                            label: Text("lebel 1"),
+                            label: Text("Red"),
                             backgroundColor: dustbinType == 1
                                 ? Color(0xFFFFCCCC)
                                 : Color(0xFFFFCCCC).withOpacity(0.3)),
@@ -347,7 +353,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Chip(
-                            label: Text("lebel 2"),
+                            label: Text("Blue"),
                             backgroundColor: dustbinType == 2
                                 ? Colors.blue
                                 : Colors.blue.withOpacity(0.3)),
@@ -355,7 +361,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Chip(
-                          label: Text("lebel 3"),
+                          label: Text("Green"),
                           backgroundColor: dustbinType == 3
                               ? Colors.green
                               : Colors.green.withOpacity(0.3),
