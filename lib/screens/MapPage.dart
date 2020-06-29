@@ -53,7 +53,7 @@ class _MapPageState extends State<MapPage> {
                   ),
                   InfoCard(color: "FFCCCC", title: "Reuse", text: reuseText,),
                   InfoCard(color: "FAE1B3", title: "Reduce", text: reduceText,),
-                  InfoCard(color: "D9F2D4", title: "Recycle", text: recycleText,),
+                  InfoCard(color: "FAE1B3", title: "Recycle", text: recycleText,),
                   Container(
                     height: 300,
                   )

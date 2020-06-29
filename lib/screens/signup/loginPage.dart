@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rrr/screens/homePage.dart';
 import 'package:rrr/screens/mainPage.dart';
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool _getIsSignedIn() {
-    bool _isSignedIn =  googleSignIn.currentUser != null;
+    bool _isSignedIn = googleSignIn.currentUser != null;
     return _isSignedIn;
   }
 
@@ -101,47 +102,114 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(), //todo:  add background image
+        children: <Widget>[
           Container(
-            child: InkWell(
-              onTap: _onLoading,
-              child: Padding(
-                padding:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1 ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF3D3D3D),
-                    borderRadius: BorderRadius.circular(360.0),
+            height: MediaQuery.of(context).size.height,
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Image.asset("assets/images/plantbg.png"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Image.asset("assets/images/phone.png"),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        // Container(
-                        //   height: 40.0,
-                        //   width: 80.0,
-                        Image.asset(
-                          "assets/images/google_sign_in_logo.png",
-                          height: 40.0,
-                          // ),
-                        ),
-                        SizedBox(
-                          width: 28.0,
-                        ),
-                        Text("Sign In with Google",
-                            style: TextStyle(fontSize: 22.0, color: Colors.white)),
-                        //By Signing up, you agree to our Terms of Service and Privacy Policy
-                      ],
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              "Learn how\nyou can contribute",
+                              style: TextStyle(
+                                  fontFamily:
+                                  GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                      .fontFamily,
+                                  color: Colors.black,
+                                  fontSize: 32),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: Text(
+                              "Tap to learn more.",
+                              style: TextStyle(
+                                  fontFamily:
+                                  GoogleFonts.sourceSansPro(fontWeight: FontWeight.bold)
+                                      .fontFamily,
+                                  color: Colors.black45,
+                                  fontSize: 18),
+                            ),
+                          ),
+                          Container(
+                            height: 32,
+                          ),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: _onLoading,
+                              child: Container(
+//                      width: MediaQuery.of(context).size.width * 0.8,
+//                    height: 50.0,
+                                constraints: BoxConstraints(minHeight: 65, maxHeight: 65),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF2B4F50),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      // Container(
+                                      //   height: 40.0,
+                                      //   width: 80.0,
+                                      Text("Sign In with",
+                                          style: TextStyle(
+                                              fontFamily:
+                                                  GoogleFonts.sourceSansPro().fontFamily,
+                                              fontSize: 22.0,
+                                              color: Colors.white)),
+                                      Container(
+                                        width: 12,
+                                      ),
+                                      Image.asset(
+                                        "assets/images/google_sign_in_logo.png",
+                                        height:32.0,
+                                        color: Colors.white,
+                                        // ),
+                                      ),
+                                      //By Signing up, you agree to our Terms of Service and Privacy Policy
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
