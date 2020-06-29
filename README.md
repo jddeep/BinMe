@@ -1,6 +1,8 @@
-# rrr
+# BinMe
 
-A new Flutter project.
+Flutter #Hack20 submission.
+
+Note: Before running the app please take care of the services.json file and Maps API Key.
 
 ## Getting Started
 
