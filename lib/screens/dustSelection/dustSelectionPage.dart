@@ -129,7 +129,6 @@ class _DustSelectionPageState extends State<DustSelectionPage>
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,19 +162,19 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                           hintText: "123456",
                           hintStyle: TextStyle(
                               fontFamily: GoogleFonts.sourceSansPro(
-                                  fontWeight: FontWeight.bold)
+                                      fontWeight: FontWeight.bold)
                                   .fontFamily,
                               fontSize: 24,
                               letterSpacing: 10.5,
                               color: Colors.black38),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
-                              borderSide:
-                              BorderSide(color: Color(0xFF2B4F50), width: 2.5)),
+                              borderSide: BorderSide(
+                                  color: Color(0xFF2B4F50), width: 2.5)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
-                              borderSide:
-                              BorderSide(color: Color(0xFF2B4F50), width: 2.5)),
+                              borderSide: BorderSide(
+                                  color: Color(0xFF2B4F50), width: 2.5)),
 //                        fillColor: Colors.grey[200],
 //                        filled: true,
                           border: OutlineInputBorder(
@@ -184,9 +183,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                             ),
                           ),
                         ),
-                        onEditingComplete: () {
-
-                        },
+                        onEditingComplete: () {},
                       ),
                     ),
                     SizedBox(
@@ -230,7 +227,9 @@ class _DustSelectionPageState extends State<DustSelectionPage>
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                 child: addressContainer(
-                    dustbinType: widget.dustbinType, location: widget.loaction, address : _address),
+                    dustbinType: widget.dustbinType,
+                    location: widget.loaction,
+                    address: _address),
               ),
               SizedBox(
                 height: 16.0,
@@ -291,9 +290,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: Container(
-        constraints: BoxConstraints(
-          maxHeight: 120
-        ),
+        constraints: BoxConstraints(maxHeight: 120),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
         child: Row(
@@ -332,7 +329,12 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                     child: Text(
                       "$address",
                       // "${location.longitude}, ${location.latitude}",
-                      style: TextStyle(fontFamily: GoogleFonts.sourceSansPro(fontWeight: FontWeight.w600).fontFamily,fontSize: 18,color: Colors.black),
+                      style: TextStyle(
+                          fontFamily: GoogleFonts.sourceSansPro(
+                                  fontWeight: FontWeight.w600)
+                              .fontFamily,
+                          fontSize: 18,
+                          color: Colors.black),
                     ),
                   ),
                   SizedBox(
@@ -343,7 +345,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                     // mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0,bottom: 4.0),
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 4.0),
                         child: Chip(
                             label: Text("lebel 1"),
                             backgroundColor: dustbinType == 1
@@ -410,7 +412,7 @@ class _DustSelectionPageState extends State<DustSelectionPage>
                   Text(
                     "Non-Bio Degradable",
                     style: TextStyle(
-                      fontFamily: GoogleFonts.sourceSansPro().fontFamily,
+                        fontFamily: GoogleFonts.sourceSansPro().fontFamily,
                         fontSize: 18.0,
                         color: Colors.pink[200],
                         fontWeight: FontWeight.w500),
