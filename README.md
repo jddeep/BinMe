@@ -2,6 +2,10 @@
 
 Flutter #Hack20 submission.
 
+Walkthrough Video - https://youtu.be/n3lvkWYyTkQ
+
+Star the repo if you like. Your support means a lot :)
+
 Note: Before running the app please take care of the services.json file and Maps API Key.
 
 ## Getting Started
