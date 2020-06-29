@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 DraggableScrollableSheet(
                   initialChildSize: 0.08,
                   minChildSize: 0.05,
-                  maxChildSize: 0.2,
+                  maxChildSize: 0.5,
                   builder: (BuildContext context,
                       ScrollController scrollController) {
                     return SingleChildScrollView(
@@ -152,7 +152,7 @@ class CustomScrollViewContent extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
 //            color: Color(0xFF78ABAD)
           ),
-                  child: CustomInnerContent(this.location),
+          child: CustomInnerContent(this.location),
         ),
       ),
     );
@@ -221,12 +221,12 @@ class CustomInnerContent extends StatelessWidget {
                             color: Colors.black38),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide:
-                                BorderSide(color: Color(0xFF2B4F50), width: 2.5)),
+                            borderSide: BorderSide(
+                                color: Color(0xFF2B4F50), width: 2.5)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide:
-                                BorderSide(color: Color(0xFF2B4F50), width: 2.5)),
+                            borderSide: BorderSide(
+                                color: Color(0xFF2B4F50), width: 2.5)),
 //                        fillColor: Colors.grey[200],
 //                        filled: true,
                         border: OutlineInputBorder(
@@ -243,7 +243,8 @@ class CustomInnerContent extends StatelessWidget {
                               loaction: this.location,
                               dustCode:
                                   "123456", //todo: need to be dynamic (fetch from qr code or textfield).
-                              dustbinType: 1, //todo: need to be dynamic (fetch from qr code or textfield)
+                              dustbinType:
+                                  1, //todo: need to be dynamic (fetch from qr code or textfield)
                             ),
                           ),
                         );
